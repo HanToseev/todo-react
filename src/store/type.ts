@@ -6,4 +6,5 @@ export interface Todo {
 
 export interface TodoState {
     todos: Todo[];
+    filter: 'all' | 'completed' | 'active';
 }

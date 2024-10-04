@@ -3,6 +3,7 @@ import {Todo, TodoState} from './type';
 
 const initialState: TodoState = {
     todos: [],
+    filter: 'all'
 };
 
 const todoSlice = createSlice({
@@ -27,10 +28,14 @@ const todoSlice = createSlice({
             state.todos = state.todos.filter(todo => todo.id !== action.payload.id)
         },
         completeAllTodos: (state) => {
-            state.todos.forEach(todo => (todo.isCompleted = true))
+            const isAllCompleted = state.todos.every((todo) => todo.isCompleted);
+            state.todos.forEach((todo) => (todo.isCompleted = !isAllCompleted));
         },
         clearCompletedTodos(state) {
             state.todos = state.todos.filter(todo => !todo.isCompleted)
+        },
+        setFilter: (state, action: PayloadAction<'all' | 'completed' | 'active'>) => {
+            state.filter = action.payload;
         },
     },
 });
@@ -40,7 +45,8 @@ export const {
     toggleTodo,
     deleteTodo,
     completeAllTodos,
-    clearCompletedTodos
+    clearCompletedTodos,
+    setFilter
 } = todoSlice.actions;
 
 const store = configureStore({

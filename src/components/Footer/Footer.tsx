@@ -1,20 +1,26 @@
 import React from "react";
 import Filters from "../Filters/Filters";
 import './Footer.css';
-import {AppDispatch, clearCompletedTodos} from "../../store/store";
-import {useDispatch} from "react-redux";
+import {AppDispatch, clearCompletedTodos, RootState} from "../../store/store";
+import {useDispatch, useSelector} from "react-redux";
 
 
-function Footer() {
+const Footer = () => {
 
     const dispatch: AppDispatch = useDispatch();
+    const todos = useSelector((state: RootState) => state.todos.todos);
+    const tasksLeft = todos.filter((todo) => !todo.isCompleted).length;
+
     const handleClearCompleted = () => {
         dispatch(clearCompletedTodos());
     };
+
+    if (todos.length === 0) return null;
+
     return (
         <footer className="footer">
             <span className='footer__count'>
-                count items left!
+                {tasksLeft} count items left!
             </span>
 
             <Filters/>

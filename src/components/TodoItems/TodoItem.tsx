@@ -9,7 +9,7 @@ interface TodoItemProps {
     todo: Todo;
 }
 
-const TodoItem = ({todo}: TodoItemProps): JSX.Element => {
+const TodoItem = ({todo}: TodoItemProps) => {
     const dispatch: AppDispatch = useDispatch();
     const handleToggle = (id: string) => {
         dispatch(toggleTodo({id}));
@@ -17,7 +17,6 @@ const TodoItem = ({todo}: TodoItemProps): JSX.Element => {
     const handleDelete = (id: string) => {
         dispatch(deleteTodo({id}));
     };
-
 
     return (
         <li className="task__item">
