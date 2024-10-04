@@ -1,11 +1,12 @@
 import React from 'react';
+import './Filters.css';
 
 function Filters() {
     return (
-        <div>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+        <div className="filters">
+            <button className="filters__button">All</button>
+            <button className="filters__button">Active</button>
+            <button className="filters__button">Completed</button>
         </div>
     );
 }

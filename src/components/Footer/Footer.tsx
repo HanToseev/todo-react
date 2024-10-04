@@ -1,19 +1,20 @@
 import React from "react";
 import Filters from "../Filters/Filters";
+import './Footer.css';
 
-function Footer(){
+function Footer() {
     return (
-        <div>
-            <span>
-                0 items left!
+        <footer className="footer">
+            <span className='footer__count'>
+                count items left!
             </span>
 
             <Filters/>
 
-            <button>
+            <button className="footer__clear">
                 Clear completed
             </button>
-        </div>
+        </footer>
     );
 }
 

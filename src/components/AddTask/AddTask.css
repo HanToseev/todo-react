@@ -1,0 +1,54 @@
+.addTask{
+    width: 100%;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+    box-sizing: border-box;
+}
+
+.addTask__toggle-all {
+    display: none;
+}
+.addTask__toggle-all + label {
+    position: relative;
+    left: -10px;
+    font-size: 24px;
+    color: #e6e6e6;
+    cursor: pointer;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.addTask__toggle-all + label::before{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 40px;
+    content: "❯";
+    color: #e6e6e6;
+}
+
+.addTask__toggle-all:checked + label::before {
+    color: #737373;
+}
+
+.addTask__input {
+    width: 100%;
+    height: 65px;
+    font-size: 24px;
+    line-height: 1.4em;
+    border: none;
+    box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+    outline: none;
+    padding-right: 16px;
+    box-sizing: border-box;
+}
+
+.addTask__input::placeholder {
+    color: #989898;
+    font-style: italic;
+}
+

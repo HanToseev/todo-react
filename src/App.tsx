@@ -1,21 +1,19 @@
 import React from 'react';
 import './App.css';
-import TodoItem from "./components/TodoItem/TodoItem";
+import TodoItems from "./components/TodoItems/TodoItems";
 import AddTask from "./components/AddTask/AddTask";
 import Footer from "./components/Footer/Footer";
 
-function App() {
+const App = () => {
     return (
-        <div className="App">
+        <section className="App">
             <h1>todos</h1>
-            <AddTask/>
-
-           <ul>
-               <TodoItem/>
-           </ul>
-
-            <Footer/>
-        </div>
+            <div className="todo">
+                <AddTask/>
+                <TodoItems/>
+                <Footer/>
+            </div>
+        </section>
     );
 }
 

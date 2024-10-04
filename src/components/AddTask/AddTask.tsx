@@ -1,9 +1,17 @@
 import React from 'react';
+import './AddTask.css';
 
-function AddTask() {
+const AddTask = () => {
     return (
-        <div>
-            <input type="text" placeholder="What needs to be done?"/>
+        <div className="addTask">
+            <input id="toggleAll"
+                   className="addTask__toggle-all"
+                   type="checkbox"/>
+            <label htmlFor="toggleAll"></label>
+
+            <input className="addTask__input"
+                   type="text"
+                   placeholder="What needs to be done?"/>
         </div>
     );
 }
