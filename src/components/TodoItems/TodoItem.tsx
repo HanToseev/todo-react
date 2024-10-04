@@ -1,17 +1,40 @@
 import React from 'react';
 import './TodoItem.css';
 import closeIco from '../../icons/cross.svg';
+import {Todo} from '../../store/type';
+import {AppDispatch, deleteTodo, toggleTodo} from "../../store/store";
+import {useDispatch} from "react-redux";
 
-const TodoItem = () => {
+interface TodoItemProps {
+    todo: Todo;
+}
+
+const TodoItem = ({todo}: TodoItemProps): JSX.Element => {
+    const dispatch: AppDispatch = useDispatch();
+    const handleToggle = (id: string) => {
+        dispatch(toggleTodo({id}));
+    };
+    const handleDelete = (id: string) => {
+        dispatch(deleteTodo({id}));
+    };
+
+
     return (
         <li className="task__item">
-            <input className="task__status" type="checkbox"/>
-            <label className="task__text">
-                задача
-                <button className="task__delete">
+            <input className="task__status"
+                   checked={todo.isCompleted}
+                   onClick={() => handleToggle(todo.id)}
+                   type="checkbox"
+            />
+
+            <p className="task__text">
+                {todo.text}
+
+                <button className="task__delete"
+                        onClick={() => handleDelete(todo.id)}>
                     <img className="task__delete-ico" src={closeIco} alt="Delete"/>
                 </button>
-            </label>
+            </p>
         </li>
     );
 }
