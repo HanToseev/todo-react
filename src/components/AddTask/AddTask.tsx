@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {addTodo, AppDispatch} from '../../store/store';
+import {addTodo, AppDispatch, completeAllTodos} from '../../store/store';
 import './AddTask.css';
 
 const AddTask = () => {
@@ -14,12 +14,17 @@ const AddTask = () => {
             setText('');
         }
     };
+    const handleClearCompleted = () => {
+        dispatch(completeAllTodos());
+    };
 
     return (
         <div className="addTask">
             <input id="toggleAll"
                    className="addTask__toggle-all"
-                   type="checkbox"/>
+                   type="checkbox"
+                   onClick={handleClearCompleted}
+            />
             <label htmlFor="toggleAll"></label>
 
             <input className="addTask__input"

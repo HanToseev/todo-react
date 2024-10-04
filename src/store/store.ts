@@ -15,21 +15,33 @@ const todoSlice = createSlice({
                 text: action.payload.text,
                 isCompleted: false,
             };
-            state.todos.push(newTodo);
+            state.todos.push(newTodo)
         },
         toggleTodo: (state, action: PayloadAction<{ id: string }>) => {
-            const todo = state.todos.find(todo => todo.id === action.payload.id);
+            const todo = state.todos.find(todo => todo.id === action.payload.id)
             if (todo) {
                 todo.isCompleted = !todo.isCompleted;
             }
         },
         deleteTodo: (state, action: PayloadAction<{ id: string }>) => {
-            state.todos = state.todos.filter(todo => todo.id !== action.payload.id);
-        }
+            state.todos = state.todos.filter(todo => todo.id !== action.payload.id)
+        },
+        completeAllTodos: (state) => {
+            state.todos.forEach(todo => (todo.isCompleted = true))
+        },
+        clearCompletedTodos(state) {
+            state.todos = state.todos.filter(todo => !todo.isCompleted)
+        },
     },
 });
 
-export const {addTodo, toggleTodo, deleteTodo} = todoSlice.actions;
+export const {
+    addTodo,
+    toggleTodo,
+    deleteTodo,
+    completeAllTodos,
+    clearCompletedTodos
+} = todoSlice.actions;
 
 const store = configureStore({
     reducer: {

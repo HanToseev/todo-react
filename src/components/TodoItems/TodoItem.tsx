@@ -23,7 +23,7 @@ const TodoItem = ({todo}: TodoItemProps): JSX.Element => {
         <li className="task__item">
             <input className="task__status"
                    checked={todo.isCompleted}
-                   onClick={() => handleToggle(todo.id)}
+                   onChange={() => handleToggle(todo.id)}
                    type="checkbox"
             />
 
