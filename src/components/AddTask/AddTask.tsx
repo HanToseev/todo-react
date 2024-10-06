@@ -1,5 +1,4 @@
-import React from 'react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {addTodo, AppDispatch, completeAllTodos} from '../../store/store';
 import './AddTask.css';
@@ -14,9 +13,7 @@ const AddTask = () => {
             setText('');
         }
     };
-    const handleClearCompleted = () => {
-        dispatch(completeAllTodos());
-    };
+    const handleClearCompleted = () => dispatch(completeAllTodos());
 
     return (
         <div className="addTask">

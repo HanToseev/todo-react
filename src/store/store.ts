@@ -1,6 +1,6 @@
 import {configureStore, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Todo, TodoState} from './type';
-import {loadTodosFromLocalStorage, saveTodosToLocalStorage} from "../components/utils/localStorage";
+import {Todo, TodoState} from '../types/type';
+import {loadTodosFromLocalStorage, saveTodosToLocalStorage} from "../utils/localStorage";
 
 const initialState: TodoState = {
     todos: [],

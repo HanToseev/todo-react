@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import './TodoItem.css';
 import closeIco from '../../icons/cross.svg';
-import {Todo} from '../../store/type';
+import {Todo} from '../../types/type';
 import {AppDispatch, deleteTodo, toggleTodo, editTodo} from "../../store/store";
 import {useDispatch} from "react-redux";
 
@@ -11,16 +11,10 @@ interface TodoItemProps {
 
 const TodoItem = ({todo}: TodoItemProps) => {
     const dispatch: AppDispatch = useDispatch();
-    const handleToggle = (id: string) => {
-        dispatch(toggleTodo({id}));
-    };
-    const handleDelete = (id: string) => {
-        dispatch(deleteTodo({id}));
-    };
-
-
     const [editText, setEditText] = useState(todo.text);
     const [editing, setEditing] = useState(false);
+    const handleToggle = (id: string) => dispatch(toggleTodo({id}));
+    const handleDelete = (id: string) => dispatch(deleteTodo({id}));
     const handleSaveEdit = () => {
         if (editText.trim()) {
             dispatch(editTodo({
@@ -40,12 +34,11 @@ const TodoItem = ({todo}: TodoItemProps) => {
             />
 
             {editing ? (
-                <input
-                    className="task__text"
-                    value={editText}
-                    onChange={(e) => setEditText(e.target.value)}
-                    onBlur={handleSaveEdit}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSaveEdit()}
+                <input className="task__text"
+                       value={editText}
+                       onChange={(e) => setEditText(e.target.value)}
+                       onBlur={handleSaveEdit}
+                       onKeyDown={(e) => e.key === 'Enter' && handleSaveEdit()}
                 />
             ) : (
                 <p className="task__text"
@@ -54,7 +47,9 @@ const TodoItem = ({todo}: TodoItemProps) => {
 
                     <button className="task__delete"
                             onClick={() => handleDelete(todo.id)}>
-                        <img className="task__delete-ico" src={closeIco} alt="Delete"/>
+                        <img className="task__delete-ico"
+                             src={closeIco}
+                             alt="Delete"/>
                     </button>
                 </p>
             )}

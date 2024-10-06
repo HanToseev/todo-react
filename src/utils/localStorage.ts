@@ -1,4 +1,4 @@
-import {TodoState} from '../../store/type';
+import {TodoState} from '../types/type';
 
 export const loadTodosFromLocalStorage = (): TodoState | undefined => {
     try {

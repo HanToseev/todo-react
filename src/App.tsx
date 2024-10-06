@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import TodoItems from "./components/TodoItems/TodoItems";
 import AddTask from "./components/AddTask/AddTask";
