@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './TodoItem.css';
 import closeIco from '../../icons/cross.svg';
 import {Todo} from '../../store/type';
-import {AppDispatch, deleteTodo, toggleTodo} from "../../store/store";
+import {AppDispatch, deleteTodo, toggleTodo, editTodo} from "../../store/store";
 import {useDispatch} from "react-redux";
 
 interface TodoItemProps {
@@ -18,6 +18,19 @@ const TodoItem = ({todo}: TodoItemProps) => {
         dispatch(deleteTodo({id}));
     };
 
+
+    const [editText, setEditText] = useState(todo.text);
+    const [editing, setEditing] = useState(false);
+    const handleSaveEdit = () => {
+        if (editText.trim()) {
+            dispatch(editTodo({
+                id: todo.id,
+                text: editText,
+            }));
+            setEditing(false);
+        }
+    };
+
     return (
         <li className="task__item">
             <input className="task__status"
@@ -26,14 +39,26 @@ const TodoItem = ({todo}: TodoItemProps) => {
                    type="checkbox"
             />
 
-            <p className="task__text">
-                {todo.text}
+            {editing ? (
+                <input
+                    className="task__text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    onBlur={handleSaveEdit}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSaveEdit()}
+                />
+            ) : (
+                <p className="task__text"
+                   onDoubleClick={() => setEditing(true)}>
+                    {todo.text}
 
-                <button className="task__delete"
-                        onClick={() => handleDelete(todo.id)}>
-                    <img className="task__delete-ico" src={closeIco} alt="Delete"/>
-                </button>
-            </p>
+                    <button className="task__delete"
+                            onClick={() => handleDelete(todo.id)}>
+                        <img className="task__delete-ico" src={closeIco} alt="Delete"/>
+                    </button>
+                </p>
+            )}
+
         </li>
     );
 }

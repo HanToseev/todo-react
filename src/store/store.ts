@@ -23,9 +23,7 @@ const todoSlice = createSlice({
         },
         toggleTodo: (state, action: PayloadAction<{ id: string }>) => {
             const todo = state.todos.find(todo => todo.id === action.payload.id)
-            if (todo) {
-                todo.isCompleted = !todo.isCompleted;
-            }
+            if (todo) todo.isCompleted = !todo.isCompleted;
         },
         deleteTodo: (state, action: PayloadAction<{ id: string }>) => {
             state.todos = state.todos.filter(todo => todo.id !== action.payload.id)
@@ -40,6 +38,10 @@ const todoSlice = createSlice({
         setFilter: (state, action: PayloadAction<'all' | 'completed' | 'active'>) => {
             state.filter = action.payload;
         },
+        editTodo: (state, action: PayloadAction<{ id: string; text: string }>) => {
+            const todo = state.todos.find((todo) => todo.id === action.payload.id);
+            if (todo) todo.text = action.payload.text;
+        },
     },
 });
 
@@ -49,7 +51,8 @@ export const {
     deleteTodo,
     completeAllTodos,
     clearCompletedTodos,
-    setFilter
+    setFilter,
+    editTodo
 } = todoSlice.actions;
 
 const store = configureStore({
