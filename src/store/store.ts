@@ -1,14 +1,17 @@
 import {configureStore, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Todo, TodoState} from './type';
+import {loadTodosFromLocalStorage, saveTodosToLocalStorage} from "../components/utils/localStorage";
 
 const initialState: TodoState = {
     todos: [],
     filter: 'all'
 };
 
+const localStorageState = loadTodosFromLocalStorage();
+
 const todoSlice = createSlice({
     name: 'todos',
-    initialState,
+    initialState: localStorageState || initialState,
     reducers: {
         addTodo: (state, action: PayloadAction<{ text: string }>) => {
             const newTodo: Todo = {
@@ -53,6 +56,11 @@ const store = configureStore({
     reducer: {
         todos: todoSlice.reducer,
     },
+});
+
+store.subscribe(() => {
+    const state = store.getState().todos;
+    saveTodosToLocalStorage(state);
 });
 
 export type RootState = ReturnType<typeof store.getState>;
